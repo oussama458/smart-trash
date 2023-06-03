@@ -25,3 +25,11 @@ Include a circuit diagram of the connections between the components if available
 7. The code also monitors the fill level of the trash bin using another ultrasonic sensor. <br>
 8. If the fill level reaches a certain threshold, a message will be sent using the GSM module. <br>
 9. Adjust the threshold values and timings in the code according to your requirements. <br>
+
+## Team
+AIT KHOUYA OUSSAMA <br>
+HAJJY ISMAIL <br>
+TAHIRI RIHAB <br>
+CHAFAI OUMAYMA <br>
+
+
