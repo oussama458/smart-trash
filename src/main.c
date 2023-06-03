@@ -47,4 +47,19 @@ void setup() {
 
 
 
+void ouverture(){
+  for(int i=0;i<=180;i++){
+    porte.write(i);
+    delay(20);
+  }
+  }
+void fermeture(){
+  for(int i=180;i>=0;i--){
+    porte.write(i);
+    delay(20);
+  }
+
+
+
+
   
