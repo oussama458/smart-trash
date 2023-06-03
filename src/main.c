@@ -41,10 +41,44 @@ void setup() {
                     // set gsm module to tp show the output on serial out
     SIM900.print("AT+CNMI=2,2,0,0,0\r"); 
     delay(100);
-  
 }
 
-
+void loop() {
+  //receive_message();
+  //message = "Warning Someone try open the house door #1";
+  //send_message(message);
+  
+  dist_presence = presence.read();
+  Serial.print(dist_presence);Serial.println(" cm"); //affichage de la distance(cm) de capteur de presence sur moniteur série
+  
+  if(etatMsg100 ==false || etatMsg50 == false){
+    if(dist_presence <= 25){
+      ouverture();
+      delay(10000);
+      fermeture();
+      compactage();
+      dist_niveau = niveau.read();
+      float pourcentage = 100 - (dist_niveau * 100 /niveau_max);
+       ///////////////////// hna fin hbasst :
+      if(pourcentage >= 50 && etatMsg50 == false){
+        send_message("niveau de poubelle etindre 50%");
+        etatMsg50 = true;
+      }
+      else if(pourcentage >= 95 && etatMsg100 == false){
+        send_message("poubelle remplie et frmée totalement");
+        etatMsg100 = true;
+      }
+    }//end if presence d'une perso
+  }
+  else{
+    dist_niveau = niveau.read();
+    float pourcentage = dist_niveau * 100 /niveau_max;
+    if(pourcentage <= 50){
+        etatMsg50 = false;
+        etatMsg100 = false;
+      }
+    }
+}
 
 
 void ouverture(){
